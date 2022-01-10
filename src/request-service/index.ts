@@ -1,4 +1,4 @@
-import fetch, { RequestInit } from "node-fetch";
+import fetch from "node-fetch";
 
 import {
   ActionInput,
@@ -160,7 +160,7 @@ export const exec = async <A>(
   const body: string | undefined =
     payload && payload !== null ? JSON.stringify(payload) : undefined;
 
-  const options: RequestInit = {
+  const options = {
     method,
     body,
     headers: { "content-type": "application/json", ...headers },
