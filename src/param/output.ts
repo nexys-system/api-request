@@ -1,8 +1,7 @@
 import * as Type from "./type";
 
-import Utils from "@nexys/utils";
-
 import { ActionOutput, ParamType } from "../types";
+import { nest } from "./utils";
 
 /**
  * takes all request input and consolidates them all into Seq[ApiParam] (via linearization)
@@ -29,7 +28,7 @@ export const explodeList = (paramsOut: any[] | any): ActionOutput => {
     throw Error("param out is not an array" + paramsOut);
   }
 
-  const headers: { [k: string]: string } = Utils.ds.nest(
+  const headers: { [k: string]: string } = nest(
     Type.filterByName(paramsOut, ParamType.headers)
   );
 
@@ -44,7 +43,7 @@ export const explodeList = (paramsOut: any[] | any): ActionOutput => {
     return { body: rootArray.value, headers };
   }
 
-  const body = Utils.ds.nest(Type.filterByName(paramsOut, ParamType.body));
+  const body = nest(Type.filterByName(paramsOut, ParamType.body));
 
   return { body, headers };
 };
