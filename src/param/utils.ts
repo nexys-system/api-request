@@ -82,3 +82,16 @@ export const isEmpty = (obj: any): boolean => {
   for (let key in obj) if (obj.hasOwnProperty(key)) return false;
   return true;
 };
+
+export const removeProp = (obj: any, prop: any): any =>
+  Object.keys(obj).reduce(
+    (acc, key) => (key !== prop ? { ...acc, [key]: obj[key] } : acc),
+    {}
+  );
+
+export const removeProps = (obj: any, props: any): any => {
+  while (props.length > 0) {
+    obj = removeProp(obj, props.pop());
+  }
+  return obj;
+};

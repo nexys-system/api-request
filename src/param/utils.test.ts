@@ -126,3 +126,15 @@ test("isempty", () => {
   expect(DSUtils.isEmpty(undefined)).toEqual(true);
   expect(DSUtils.isEmpty([])).toEqual(false);
 });
+
+test("remove prop", () => {
+  const obj = { a: "sdf", b: "sd" };
+
+  expect(DSUtils.removeProp(obj, "b")).toEqual({ a: "sdf" });
+});
+
+test("remove prop", () => {
+  const obj = { a: "sdf", b: "sd" };
+
+  expect(DSUtils.removeProps(obj, ["a", "b"])).toEqual({});
+});

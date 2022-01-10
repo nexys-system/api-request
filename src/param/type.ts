@@ -1,4 +1,3 @@
-import Utils from "@nexys/utils";
 import { DataType, Param, ParamType, RequestMapping } from "../types";
 import * as U from "./utils";
 
@@ -60,7 +59,7 @@ export const format = (
   }
 
   // NOTE: handle empty response
-  if (Utils.ds.isEmpty(data)) {
+  if (U.isEmpty(data)) {
     return [];
   }
 
@@ -83,7 +82,7 @@ export const format = (
         const value = data[key];
         if (value) {
           nonPrimitives.push({ key, value });
-          data = Utils.ds.removeProp(data, key);
+          data = U.removeProp(data, key);
         }
       });
   }
