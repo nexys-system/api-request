@@ -22,14 +22,16 @@
     "typescript",
     "SDK"
   ],
-  "dependencies": {
+  "peerDependencies": {
     "@types/node-fetch": "^2.5.12",
     "node-fetch": "^2.6.1"
   },
   "devDependencies": {
     "@types/jest": "^25.2.3",
     "@types/nock": "^11.1.0",
+    "@types/node-fetch": "^2.5.12",
     "jest": "^26.0.1",
+    "node-fetch": "^2.6.1",
     "ts-jest": "^25.3.1",
     "typescript": "^3.9.3"
   }
