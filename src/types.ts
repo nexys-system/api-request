@@ -1,4 +1,4 @@
-import { Uuid } from "@nexys/utils/dist/types";
+type Uuid = string;
 
 export enum DataType {
   String = 1,

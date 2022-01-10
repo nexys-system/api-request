@@ -1,7 +1,7 @@
 import { Request } from "../types";
 
-import Utils from "@nexys/utils";
 import { Context } from "../context";
+import { isEmpty } from "../param/utils";
 
 /**
  * replaces en var in request - takes env var from the context (prod, test, dev etc) and replaces in the request object
@@ -83,6 +83,31 @@ export const getEnvValFinal = (
 };
 
 /**
+ * when a given url: `/foo/:myparam1/bar` replace `:myparam1` with content of `obj[myparam1]`
+ * @param  url: original url
+ * @param  obj: object containing the value of the params
+ * @return url with substituted values
+ */
+export const replaceParams = (
+  uri: string,
+  params: { [k: string]: any },
+  curly: boolean = false
+) => {
+  if (!params || !(typeof params === "object")) {
+    return uri;
+  }
+
+  Object.entries(params).map(([key, value]: [string, any]) => {
+    if (curly) {
+      const regex = new RegExp(`\\$\\{${key}\\}`, "g");
+      uri = uri.replace(regex, value);
+    } else uri = uri.replace(`:${key}`, value);
+  });
+
+  return uri;
+};
+
+/**
  * replace URI params
  * @params: request: request object
  * @params params: params object with var that will be substituted in url
@@ -104,7 +129,7 @@ const replaceUriParams = (request: Request, params = {}): Request => {
     format: { prefix: "params" },
   });*/
 
-  const uri = Utils.url.replaceParams(request.uri, params, true);
+  const uri = replaceParams(request.uri, params, true);
 
   return {
     ...request,
@@ -123,7 +148,7 @@ export const prepare = (
   // NOTE: replace $ENV{} vars in HOST, URI & Authorization
   request = replaceEnvVar(request, context);
 
-  if (!Utils.ds.isEmpty(params)) {
+  if (!isEmpty(params)) {
     // NOTE: replace ${} params in URI
     return replaceUriParams(request, params);
   }

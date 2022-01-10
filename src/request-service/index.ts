@@ -11,9 +11,11 @@ import {
 
 import * as ParamService from "../param";
 import * as U from "./utils";
-import { Uuid } from "@nexys/utils/dist/types";
+
 import LogService from "./logs/abstract";
 import { Context } from "../context";
+
+type Uuid = string;
 
 /**
  * find request

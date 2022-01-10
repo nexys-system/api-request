@@ -70,3 +70,15 @@ export const nest = (data: any = null, props: any = []): any => {
     return { [prop]: result };
   }
 };
+
+/**
+ * checks if object is empty
+ * @param  {[type]} obj [description]
+ * @return {[type]}     [description]
+ */
+export const isEmpty = (obj: any): boolean => {
+  if (Array.isArray(obj)) return false;
+  if (!obj) return true;
+  for (let key in obj) if (obj.hasOwnProperty(key)) return false;
+  return true;
+};

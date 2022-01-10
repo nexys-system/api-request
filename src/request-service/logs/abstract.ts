@@ -1,5 +1,6 @@
-import { Uuid } from "@nexys/utils/dist/types";
 import { Context } from "../../context";
+
+type Uuid = string;
 
 interface MutateResponseInsert {
   success: boolean;

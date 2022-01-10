@@ -1,6 +1,7 @@
-import { Uuid } from "@nexys/utils/dist/types";
 import { Context } from "../../context";
 import AbstractService from "./abstract";
+
+type Uuid = string;
 
 export default class LogService extends AbstractService {
   insert = (
