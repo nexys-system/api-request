@@ -1,6 +1,6 @@
 import * as Type from "./type";
 import { ActionInput, Param, ParamType, RequestMapping } from "../types";
-import Utils from "@nexys/utils";
+import * as Utils from "./utils";
 
 /**
  * takes all request input and consolidates them all into Seq[ApiParam] (via linearization)
@@ -31,7 +31,7 @@ export const getPayload = (pBody: Param[], rawBody?: string): any => {
   if (rootArray) {
     return rootArray.value;
   }
-  return Utils.ds.nest(pBody);
+  return Utils.nest(pBody);
 };
 
 /**
@@ -43,8 +43,8 @@ export const explodeList = (arr: Param[], rawBody?: string): ActionInput => {
   // console.log(arr);
   const pBody = Type.filterByName(arr, ParamType.body);
   // TODO: remove unwanted headers
-  const headers = Utils.ds.nest(Type.filterByName(arr, ParamType.headers));
-  const query = Utils.ds.nest(Type.filterByName(arr, ParamType.params));
+  const headers = Utils.nest(Type.filterByName(arr, ParamType.headers));
+  const query = Utils.nest(Type.filterByName(arr, ParamType.params));
 
   const data = getPayload(pBody, rawBody);
 
