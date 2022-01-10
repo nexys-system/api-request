@@ -1,3 +1,5 @@
-test("dummy", () => {
-  expect(2 + 2).toEqual(4);
+import * as Index from "./index";
+
+test("imports", () => {
+  expect(typeof Index.Request).toEqual("function");
 });
