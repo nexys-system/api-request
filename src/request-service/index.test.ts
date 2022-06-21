@@ -1,4 +1,4 @@
-import nock from "nock";
+//import nock from "nock";
 
 import * as RequestService from "./index";
 import { ActionInput, Request, ParamType, DataType } from "../types";
@@ -70,10 +70,10 @@ const standardRequest: Request = {
 };
 
 test("standard request - success", async () => {
-  nock("https://example.com")
+  /* nock("https://example.com")
     .post("/standard/request", { name: "Lucy" }, undefined)
     .matchHeader("authorization", "Bearer TOKEN")
-    .reply(200, { id: 2 }, undefined);
+    .reply(200, { id: 2 }, undefined);*/
 
   const data = { test_1: "test" };
   const headers = { authorization: "Bearer TOKEN" };
@@ -91,10 +91,10 @@ test("standard request - success", async () => {
 });
 
 test("standard request - error", async () => {
-  nock("https://example.com")
+  /* nock("https://example.com")
     .post("/standard/request", undefined, undefined)
     .matchHeader("authorization", "Bearer TOKEN")
-    .reply(500, "My Internal Server Error", undefined);
+    .reply(500, "My Internal Server Error", undefined);*/
 
   const data = { test_1: "test" };
   const headers = { authorization: "Bearer TOKEN" };
@@ -120,9 +120,9 @@ arrayRequest.mappingIn = [];
 arrayRequest.mappingOut = [];
 
 test("array in request", async () => {
-  nock("https://example.com")
+  /* nock("https://example.com")
     .post("/standard/request", undefined, undefined)
-    .reply(200, { success: true }, undefined);
+    .reply(200, { success: true }, undefined);*/
 
   // todo this is not a real test
   const data: ActionInput = { data: [{ this: "works2" }] };
@@ -139,9 +139,9 @@ test("array in request", async () => {
 });
 
 test("array out request", async () => {
-  nock("https://example.com")
+  /* nock("https://example.com")
     .post("/standard/request", undefined, undefined)
-    .reply(200, [{ success: true }], undefined);
+    .reply(200, [{ success: true }], undefined);*/
 
   const data: ActionInput = { data: {} };
   const result = await RequestService.execWithMapping(
